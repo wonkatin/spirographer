@@ -21,7 +21,7 @@ include TBD:
 
 **Wireframe(s):**
 
-![wireframe](./spiro-wireframe-1.jpg)
+![wireframe](./images/spiro-wireframe-1.jpg)
 
 
 **Sprints:** 
