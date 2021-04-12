@@ -43,7 +43,6 @@ Monday
 Tuesday
 - continue to study the borrowed code syntax and equations
 - continue to set up my own equation & code 
-- style the page
 - generate random spirograph, MVP!!!
 
 Wednesday
