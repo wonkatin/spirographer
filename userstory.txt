@@ -1,0 +1,2 @@
+MVP: as a user I want to be able to see a randomly generated spirograph
+Stretch: as a user I want to be able to manipulate and create my own spirograph
