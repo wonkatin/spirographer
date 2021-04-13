@@ -36,7 +36,7 @@ Sunday
 Monday
 - set up repo for the project 
 - rough draft of read me 
-- study the borrowed spirograph (and other equations online)
+- study the borrowed spirograph (and other equations online credit: https://observablehq.com/collection/@syaleni/parametric-geometry)
 - google D3 syntax in borrowed example for updated D3 implementation 
 - start setting up D3 in project repo
 
