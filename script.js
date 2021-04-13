@@ -42,6 +42,7 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 // function to plot the *spiro array*, this will be the hardest part
 function getSpiroArray() {
     let spiroArray = []
+
     return spiroArray
 }
 
@@ -54,10 +55,17 @@ const line = d3.line()
 
 function drawSpiro() {
     let path = svg.append('path')
-    .attr('fill', 'none')
-    .style('stroke', 'blue')
-    .attr('d', line(spiroArray))
-    // .attr('d', line(getSpiroArray()))
+                    .attr('fill', 'none')
+                    .style('stroke', 'black')
+                    // .attr('d', line(spiroArray))
+                    .attr('d', line(getSpiroArray()))
+    
+    let totalLength = path.node().getTotalLength()
+    console.log('total length', totalLength)
+    path.transition().duration(2000).ease(d3.easeLinear)
+        .attrTween("stroke-dasharray", function() {
+            return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`);
+        })
 }
 // setTimeout(function () {
 //     drawSpiro()
