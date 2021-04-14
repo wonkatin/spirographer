@@ -50,7 +50,7 @@ function getRandomNumber(start, end) { // get random number between range
     return (Math.floor((Math.random() * (end-start))) + start); // don't go under the start or over the end
 }
 
-// function to find lcd of R & r
+// function to find lcm of R & r
 function lcm(num1, num2) {
       //Find the smallest and biggest number from both the numbers
     let lar = Math.max(num1, num2);
@@ -68,12 +68,13 @@ function lcm(num1, num2) {
 // let helper = lcm(3,5)
 // console.log('lcm', helper)
 function getSpiroArray() {
+
     let spiroArray = []
-    // let R = getRandomNumber(60, maxSize)
     let R = getRandomNumber(60, maxSize)
-    // let r = getRandomNumber(40, (R * 0.75))
     let r = getRandomNumber(40, (R * 0.75))
-    let d = getRandomNumber(25, r);
+    // let r = getRandomNumber(60, maxSize)
+    // let R = getRandomNumber(40, (r * 0.75))
+    let d = getRandomNumber(5, (r * .75));
     
     //trial equation round one
     // for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
@@ -83,19 +84,22 @@ function getSpiroArray() {
     // }
     //trial equation round two
     // Hypotrochoid
-    // for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += 0.01) { //https://www.wikiwand.com/en/Hypotrochoid
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Hypotrochoid
     //     x = 300 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
     //     y = 200 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+        
     //     spiroArray.push({x: x, y: y})
     // }
     // Epitrochoid
-    for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += 0.01) { //https://www.wikiwand.com/en/Hypotrochoid
-        x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
-        y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
-        spiroArray.push({x: x, y: y})
-    }
+    // for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
+    //     x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
+    //     y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
+    //     spiroArray.push({x: x, y: y})
+    // }
+    // trial equation round three
+
     console.log('spiro-array', spiroArray)
-    console.log('R:', R, 'r:', r, 'd:', d)
+    console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     return spiroArray
 }
 
