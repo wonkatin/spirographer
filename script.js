@@ -4,7 +4,7 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 let width = window.innerWidth / 2;
 let height = window.innerHeight /2;
 maxSize = Math.min(width, height)
-console.log(maxSize)
+console.log('max-size', maxSize)
 //TEST
 // svg.append('text')
 //     .text('hello from the svg element')
@@ -51,14 +51,17 @@ function getRandomNumber(start, end) { // get random number between range
 }	
 function getSpiroArray() {
     let spiroArray = []
+    // let R = getRandomNumber(60, maxSize)
     let R = getRandomNumber(60, maxSize)
-    let r = getRandomNumber(40, (R * 0.75));
+    // let r = getRandomNumber(40, (R * 0.75))
+    let r = getRandomNumber(40, (R * 0.75))
 
-    for (let theta = 0; theta < (2 * Math.PI); theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
-        x = (R-r) * Math.cos(theta) + Math.cos(((R-r)/r) * theta)
-        y = (R-r) * Math.sin(theta) - Math.sin(((R-r)/r) * theta)
+    for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
+        x = 300 + r * Math.cos(theta) + (R - 10) * Math.cos(25 * theta)
+        y = 200 + r * Math.sin(theta) - (R - 10) * Math.sin(25 * theta)
         spiroArray.push({x: x, y: y})
     }
+    console.log('spiro-array', spiroArray)
     return spiroArray
 }
 
@@ -84,6 +87,6 @@ function drawSpiro() {
             return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
         })
 }
-// setTimeout(function () {
-//     drawSpiro()
-// }, 1000)
+setTimeout(function () {
+    drawSpiro()
+}, 1000)
