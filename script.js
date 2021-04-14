@@ -71,11 +71,11 @@ function getSpiroArray() {
 
     let spiroArray = []
     let R = getRandomNumber(60, maxSize)
-    let r = getRandomNumber(0, 1)
-    // let r = getRandomNumber(60, maxSize)
+    // let r =  Math.random()
+    let r = getRandomNumber(60, maxSize)
     // let R = getRandomNumber(40, (r * 0.75))
-    // let d = getRandomNumber(5, (R * .75))
-    let d = getRandomNumber(0, 1)
+    let d = getRandomNumber(5, (R * .75))
+    // let d =  Math.random()
     
     //trial equation round one
     // for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
@@ -85,12 +85,12 @@ function getSpiroArray() {
     // }
     //trial equation round two
     // Hypotrochoid
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Hypotrochoid
-    //     x = 300 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
-    //     y = 200 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Hypotrochoid
+        x = 300 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+        y = 200 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
         
-    //     spiroArray.push({x: x, y: y})
-    // }
+        spiroArray.push({x: x, y: y})
+    }
     // Epitrochoid
     // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
     //     x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
@@ -105,12 +105,12 @@ function getSpiroArray() {
     //     spiroArray.push({x: x, y: y})
     // } 
 
-    // trial four
-    for (let theta = 0; theta <= Math.ceil((2 * Math.PI)); theta += .01) {  
-        x = R * ((1 - r) * Math.cos(theta) + (d * r) * Math.cos(((1-r)/r) * theta))
-        y = R * ((1 - r) * Math.sin(theta) + (d * r) * Math.sin(((1-r)/r) * theta))
-        spiroArray.push({x: x, y: y})
-    }  
+    // trial four // this formula crashed chrome
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  
+    //     x = R * ((1 - r) * Math.cos(theta) + (d * r) * Math.cos(((1-r)/r) * theta))
+    //     y = R * ((1 - r) * Math.sin(theta) + (d * r) * Math.sin(((1-r)/r) * theta))
+    //     spiroArray.push({x: x, y: y})
+    // }  
     console.log('spiro-array', spiroArray)
     console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     return spiroArray
