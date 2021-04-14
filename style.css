@@ -1,6 +1,7 @@
 html, body {
     margin: 0;
     height: 100%;
+    background-color: #3c083c;
 }
 h1 {
     color: chartreuse;

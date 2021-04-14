@@ -1,9 +1,14 @@
 // svg element
 const svg = d3.select('body').append('svg').attr('height','100%').attr('width','100%')
 //
-let width = window.innerWidth / 2;
-let height = window.innerHeight /2;
-maxSize = Math.min(width, height)
+let width = window.innerWidth;
+let height = window.innerHeight;
+// add margins
+// add variables for inputs R, r, d, color, animation speed, stop, start, clear, and max size? or at least size of the spiro
+// add inputs
+
+// add ability to download or save
+maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
 //TEST
 // svg.append('text')
@@ -45,7 +50,7 @@ console.log('max-size', maxSize)
 
 //////////////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
 
-// function to plot the *spiro array*
+// function to get random numbers between two numbers
 function getRandomNumber(start, end) { // get random number between range
     return (Math.floor((Math.random() * (end-start))) + start); // don't go under the start or over the end
 }
@@ -55,27 +60,25 @@ function lcm(num1, num2) {
       //Find the smallest and biggest number from both the numbers
     let lar = Math.max(num1, num2);
     let small = Math.min(num1, num2);
-
     //Loop till you find a number by adding the largest number which is divisible by the smallest number
     let i = lar;
     while(i % small !== 0){
       i += lar;
     }
-
     //return the number
     return i;
 }
 // let helper = lcm(3,5)
 // console.log('lcm', helper)
+
+
+// function to plot the *spiro array*
 function getSpiroArray() {
 
     let spiroArray = []
     let R = getRandomNumber(60, maxSize)
-    // let r =  Math.random()
-    let r = getRandomNumber(60, maxSize)
-    // let R = getRandomNumber(40, (r * 0.75))
-    let d = getRandomNumber(5, (R * .75))
-    // let d =  Math.random()
+    let r = getRandomNumber(40, (R * 0.5))
+    let d = getRandomNumber(5, R)
     
     //trial equation round one
     // for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
@@ -85,13 +88,13 @@ function getSpiroArray() {
     // }
     //trial equation round two
     // Hypotrochoid
-    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Hypotrochoid
+    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
         x = 300 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
         y = 200 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
         
         spiroArray.push({x: x, y: y})
     }
-    // Epitrochoid
+    // Epitrochoid 
     // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
     //     x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
     //     y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
@@ -99,20 +102,39 @@ function getSpiroArray() {
     // }
     // trial equation round three // https://www.youtube.com/watch?v=n7T91LDJ--E
 
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { 
     //     x = 300 + (R-r) * Math.cos(theta) + d *(Math.cos(( (R/r) - 1) * theta))
     //     y = 200 + (R-r) * Math.sin(theta) - d *(Math.sin(( (R/r) - 1) * theta))
     //     spiroArray.push({x: x, y: y})
     // } 
 
-    // trial four // this formula crashed chrome
+    // trial four // this formula crashed chrome // https://observablehq.com/@syaleni/spirograph?collection=@syaleni/parametric-geometry
     // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  
     //     x = R * ((1 - r) * Math.cos(theta) + (d * r) * Math.cos(((1-r)/r) * theta))
     //     y = R * ((1 - r) * Math.sin(theta) + (d * r) * Math.sin(((1-r)/r) * theta))
     //     spiroArray.push({x: x, y: y})
     // }  
+
+    //trial five // I want to know what her equation is doing that mine is not. https://github.com/nbremer/spirograph-easy & https://github.com/nbremer/spirograph/blob/gh-pages/js/script.js
+    // var R = getRandomNumber(60, maxSize);
+    // var r = getRandomNumber(40, (R * 0.75));
+    // var alpha = getRandomNumber(25, r);
+    // var l = alpha / r;
+    // var k = r / R;
+	
+    // for(var theta=1; theta<=20000; theta += 1){
+    //     var t = ((Math.PI / 180) * theta);
+    //     var ang = ((l-k)/k) * t;
+
+    //     var x = 400 + (R * ((1-k) * Math.cos(t) + ((l*k) * Math.cos(ang))));
+    //     var y = 300 + (R * ((1-k) * Math.sin(t) - ((l*k) * Math.sin(ang))));
+		
+    //     spiroArray.push({x: x, y: y});                               
+    // }  
     console.log('spiro-array', spiroArray)
-    console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
+    // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
+    console.log('R:', R, 'r:', r, 'd:', d)
+    // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
     return spiroArray
 }
 
@@ -126,7 +148,7 @@ const line = d3.line()
 function drawSpiro() {
     let path = svg.append('path') //this is the path
                     .attr('fill', 'none') // not sure if i need this 
-                    .style('stroke', 'black') // stroke is the color 
+                    .style('stroke', 'chartreuse') // stroke is the color 
                     // .attr('d', line(spiroArray))
                     .attr('d', line(getSpiroArray())) // tells path where to draw the line using x & y coordinates 
                                                 
