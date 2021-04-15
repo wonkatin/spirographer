@@ -14,7 +14,25 @@ console.log('max-size', maxSize)
 //https://github.com/d3/d3-selection/blob/master/README.md#handling-events
 
 // add ability to download or save
+//TEST RANGE INPUT
+svg.append("circle")
+    .attr("cx", 300)
+    .attr("cy", 150) 
+    .style("fill", "none")   
+    .style("stroke", "chartreuse") 
+    .attr("r", 120);
 
+d3.select('#nRadius').on('input', function(){
+    update(+this.value)
+})
+update(120)
+function update(nRadius){
+    d3.select('#nRadius-value').text(nRadius);
+    d3.select('#nRadius').property('value', nRadius)
+    svg.selectAll('circle')
+        .attr('r', nRadius)
+    // console.log('nRadius', nRadius)
+}
 //TEST
 // svg.append('text')
 //     .text('hello from the svg element')
@@ -160,13 +178,12 @@ function drawSpiro() {
     
     let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
     console.log('total length', totalLength)
-    path.transition().duration(2000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
-        .attrTween("stroke-dasharray", function() { // https://github.com/d3/d3-transition#transition_attrTween
-            return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
-        })
+    // path.transition().duration(2000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
+    //     .attrTween("stroke-dasharray", function() { // https://github.com/d3/d3-transition#transition_attrTween
+    //         return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
+    //     })
 }
-setTimeout(function () {
-    drawSpiro()
-}, 1000)
+// setTimeout(function () {
+//     drawSpiro()
+// }, 1000)
 
-svg.select('#form')
