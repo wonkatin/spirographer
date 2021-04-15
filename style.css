@@ -1,9 +1,12 @@
 html, body {
     margin: 0;
     height: 100%;
-    background-color: #3c083c;
+    background-color: #281e28;
 }
 h1 {
-    color: chartreuse;
+    color: rgb(255, 0, 221);
     margin: 20px
+}
+label {
+    color: chartreuse;
 }

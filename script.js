@@ -4,12 +4,15 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 let width = window.innerWidth;
 let height = window.innerHeight;
 // add margins
-// add variables for inputs R, r, d, color, animation speed, stop, start, clear, and max size? or at least size of the spiro
-// add inputs
-
-// add ability to download or save
 maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
+
+// add variables for inputs R, r, d, color, animation speed, stop, start, clear, and max size? or at least size of the spiro
+// add inputs //https://bl.ocks.org/d3noob search for input examples
+//https://github.com/d3/d3-selection/blob/master/README.md#handling-events
+
+// add ability to download or save
+
 //TEST
 // svg.append('text')
 //     .text('hello from the svg element')
