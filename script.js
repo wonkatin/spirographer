@@ -9,7 +9,7 @@ let height = window.innerHeight;
 maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
 
-// add variables for inputs R, r, d, color, clear svg, save svg
+// add variables for inputs R, r, d, color, spiro style(2 styles), clear svg, save svg
 // add inputs //https://bl.ocks.org/d3noob search for input examples
 //https://github.com/d3/d3-selection/blob/master/README.md#handling-events
 
@@ -39,7 +39,7 @@ function lcm(num1, num2) {
 // console.log('lcm', helper)
 
 // R: 230 r: 100 d: 137
-let spiroArray = []
+
 // let R = getRandomNumber(60, maxSize)
 // let r = getRandomNumber(40, (R * 0.5))
 // let d = getRandomNumber(5, R)
@@ -59,6 +59,7 @@ d3.select('#pen').on('input', function(){
 })
 d3.select('#color').on('input', function(){
     updateColor(this.value)
+    // console.log('color value', this.value)
 })
 updateOuter(230)
 updateInner(100)
@@ -81,17 +82,19 @@ function updatePen(pen) {
 }
 function updateColor(color) {
     d3.select('#color').property('value', color)
+    // console.log('color value', color)
 }
 d3.select('#newspiro').on('click', function(){
-    R = outer.value;
-    r = inner.value;
-    d = pen.value;
-    color = color.value;
+    R = d3.select('#outer').property('value');
+    r = d3.select('#inner').property('value');
+    d = d3.select('#pen').property('value');
+    color = d3.select('#color').property('value');
     console.log(R, r, d, color)
     drawSpiro()
 })
 // function to plot the *spiro array*
 function getSpiroArray() {
+    let spiroArray = []
     // Hypotrochoid
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
         x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
