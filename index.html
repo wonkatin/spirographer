@@ -22,13 +22,16 @@
     <!-- <form id="form"> -->
 
         <label for="outer">outer gear: <span id="outer-gear-value">...</span></label>
-        <input type="range" min="1" max="300" id="outer" value="200" step="10">
+        <input type="range" min="0" max="300" id="outer" step="10">
 
         <label for="inner">inner gear: <span id="inner-gear-value">...</span></label>
-        <input type="range" min="1" max="300" id="inner" value="200" step="10">
+        <input type="range" min="0" max="300" id="inner" step="10">
 
         <label for="pen">pen point: <span id="pen-variable-value">...</span></label>
-        <input type="range" min="1" max="300" id="pen" value="200" step="10">
+        <input type="range" min="0" max="300" id="pen" step="10">
+
+        <label for="color">pick a color: </label>
+        <input type="color" id="color">
 
         <!-- <input type="submit" value="draw spiro"> -->
         <button id="newspiro">draw spiro</button>

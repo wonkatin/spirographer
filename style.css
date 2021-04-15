@@ -4,9 +4,9 @@ html, body {
     background-color: #453256;
 }
 h1 {
-    color: rgb(255, 0, 221);
+    color: #ff00dd;
     margin: 20px
 }
 label {
-    color: chartreuse;
+    color: #7fff00;
 }

@@ -43,9 +43,10 @@ let spiroArray = []
 // let R = getRandomNumber(60, maxSize)
 // let r = getRandomNumber(40, (R * 0.5))
 // let d = getRandomNumber(5, R)
-let R = 230
-let r = 100
-let d = 137
+// let R = 230
+// let r = 100
+// let d = 140
+
 // user inputs
 d3.select('#outer').on('input', function(){
     updateOuter(+this.value)
@@ -56,41 +57,41 @@ d3.select('#inner').on('input', function(){
 d3.select('#pen').on('input', function(){
     updatePen(+this.value)
 })
+d3.select('#color').on('input', function(){
+    updateColor(this.value)
+})
 updateOuter(230)
 updateInner(100)
-updatePen(137)
+updatePen(140)
+updateColor('#7fff00')
 function updateOuter(outer) {
     d3.select('#outer-gear-value').text(outer);
-    // d3.select('#outer').property('value', outer)
+    d3.select('#outer').property('value', outer)
     // console.log('outer', outer)
 }
 function updateInner(inner) {
     d3.select('#inner-gear-value').text(inner);
-    // d3.select('#inner').property('value', inner)
+    d3.select('#inner').property('value', inner)
     // console.log('inner', inner)
 }
 function updatePen(pen) {
     d3.select('#pen-variable-value').text(pen);
-    // d3.select('#pen').property('value', pen)
+    d3.select('#pen').property('value', pen)
     // console.log('pen', pen)
 }
+function updateColor(color) {
+    d3.select('#color').property('value', color)
+}
 d3.select('#newspiro').on('click', function(){
-    d3.select('#outer').property('value', outer)
-    d3.select('#inner').property('value', inner)
-    d3.select('#pen').property('value', pen)
-    console.log(inner.value, outer.value, pen.value)
+    R = outer.value;
+    r = inner.value;
+    d = pen.value;
+    color = color.value;
+    console.log(R, r, d, color)
+    drawSpiro()
 })
 // function to plot the *spiro array*
 function getSpiroArray() {
-    
-    
-    //trial equation round one
-    // for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
-    //     x = 300 + r * Math.cos(theta) + (R - 10) * Math.cos(25 * theta)
-    //     y = 200 + r * Math.sin(theta) - (R - 10) * Math.sin(25 * theta)
-    //     spiroArray.push({x: x, y: y})
-    // }
-    //trial equation round two
     // Hypotrochoid
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
         x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
@@ -104,38 +105,8 @@ function getSpiroArray() {
     //     y = 400 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
     //     spiroArray.push({x: x, y: y})
     // }
-    // trial equation round three // https://www.youtube.com/watch?v=n7T91LDJ--E
-    
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { 
-        //     x = 300 + (R-r) * Math.cos(theta) + d *(Math.cos(( (R/r) - 1) * theta))
-        //     y = 200 + (R-r) * Math.sin(theta) - d *(Math.sin(( (R/r) - 1) * theta))
-        //     spiroArray.push({x: x, y: y})
-        // } 
-        
-    // trial four // this formula crashed chrome // https://observablehq.com/@syaleni/spirograph?collection=@syaleni/parametric-geometry
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  
-        //     x = R * ((1 - r) * Math.cos(theta) + (d * r) * Math.cos(((1-r)/r) * theta))
-        //     y = R * ((1 - r) * Math.sin(theta) + (d * r) * Math.sin(((1-r)/r) * theta))
-        //     spiroArray.push({x: x, y: y})
-        // }  
-        
-    //trial five // I want to know what her equation is doing that mine is not. https://github.com/nbremer/spirograph-easy & https://github.com/nbremer/spirograph/blob/gh-pages/js/script.js
-    // var R = getRandomNumber(60, maxSize);
-    // var r = getRandomNumber(40, (R * 0.75));
-    // var alpha = getRandomNumber(25, r);
-    // var l = alpha / r;
-    // var k = r / R;
-    
-    // for(var theta=1; theta<=20000; theta += 1){
-        //     var t = ((Math.PI / 180) * theta);
-        //     var ang = ((l-k)/k) * t;
-        
-        //     var x = 400 + (R * ((1-k) * Math.cos(t) + ((l*k) * Math.cos(ang))));
-        //     var y = 300 + (R * ((1-k) * Math.sin(t) - ((l*k) * Math.sin(ang))));
-        
-        //     spiroArray.push({x: x, y: y});                               
-        // }  
-    console.log('spiro-array', spiroArray)
+
+    console.log('spiro-array', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     console.log('R:', R, 'r:', r, 'd:', d)
     // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
@@ -152,7 +123,7 @@ const line = d3.line()
 function drawSpiro() {
     let path = svg.append('path') //this is the path
     .attr('fill', 'none') // not sure if i need this 
-    .style('stroke', 'chartreuse') // stroke is the color 
+    .style('stroke', color) // stroke is the color 
     // .attr('d', line(spiroArray))
     .attr('d', line(getSpiroArray())) // tells path where to draw the line using x & y coordinates 
     
@@ -160,14 +131,14 @@ function drawSpiro() {
     let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
     console.log('total length', totalLength)
     //i think i can change the speed by making the duration dependent upon the length of the path or the number of plotted points
-    path.transition().duration(20000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
+    path.transition().duration(2000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
     .attrTween("stroke-dasharray", function() { // https://github.com/d3/d3-transition#transition_attrTween
         return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
     })
 }
-setTimeout(function () {
-    drawSpiro()
-}, 1000)
+// setTimeout(function () {
+//     drawSpiro()
+// }, 1000)
             
             
 //TEST RANGE INPUT
@@ -227,3 +198,66 @@ setTimeout(function () {
 // setTimeout(function () {
 //     addLine()
 // }, 1000)
+
+
+// TEST EQUATIONS
+// function getSpiroArray() {
+    
+    
+    //trial equation round one
+    // for (let theta = 0; theta <= (2 * Math.PI) + .1 ; theta += 0.01) { //https://maissan.net/articles/javascript-spirograph
+    //     x = 300 + r * Math.cos(theta) + (R - 10) * Math.cos(25 * theta)
+    //     y = 200 + r * Math.sin(theta) - (R - 10) * Math.sin(25 * theta)
+    //     spiroArray.push({x: x, y: y})
+    // }
+    //trial equation round two
+    // Hypotrochoid
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
+    //     x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+    //     y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+        
+    //     spiroArray.push({x: x, y: y})
+    // }
+    // Epitrochoid 
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
+    //     x = 500 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
+    //     y = 400 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
+    //     spiroArray.push({x: x, y: y})
+    // }
+    // trial equation round three // https://www.youtube.com/watch?v=n7T91LDJ--E
+    
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { 
+        //     x = 300 + (R-r) * Math.cos(theta) + d *(Math.cos(( (R/r) - 1) * theta))
+        //     y = 200 + (R-r) * Math.sin(theta) - d *(Math.sin(( (R/r) - 1) * theta))
+        //     spiroArray.push({x: x, y: y})
+        // } 
+        
+    // trial four // this formula crashed chrome // https://observablehq.com/@syaleni/spirograph?collection=@syaleni/parametric-geometry
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  
+        //     x = R * ((1 - r) * Math.cos(theta) + (d * r) * Math.cos(((1-r)/r) * theta))
+        //     y = R * ((1 - r) * Math.sin(theta) + (d * r) * Math.sin(((1-r)/r) * theta))
+        //     spiroArray.push({x: x, y: y})
+        // }  
+        
+    //trial five // I want to know what her equation is doing that mine is not. https://github.com/nbremer/spirograph-easy & https://github.com/nbremer/spirograph/blob/gh-pages/js/script.js
+    // var R = getRandomNumber(60, maxSize);
+    // var r = getRandomNumber(40, (R * 0.75));
+    // var alpha = getRandomNumber(25, r);
+    // var l = alpha / r;
+    // var k = r / R;
+    
+    // for(var theta=1; theta<=20000; theta += 1){
+        //     var t = ((Math.PI / 180) * theta);
+        //     var ang = ((l-k)/k) * t;
+        
+        //     var x = 400 + (R * ((1-k) * Math.cos(t) + ((l*k) * Math.cos(ang))));
+        //     var y = 300 + (R * ((1-k) * Math.sin(t) - ((l*k) * Math.sin(ang))));
+        
+        //     spiroArray.push({x: x, y: y});                               
+        // }  
+    // console.log('spiro-array', spiroArray)
+    // // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
+    // console.log('R:', R, 'r:', r, 'd:', d)
+    // // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
+    // return spiroArray
+// }
