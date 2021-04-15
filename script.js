@@ -48,42 +48,60 @@ function lcm(num1, num2) {
 // let d = 140
 
 // user inputs
+// set fixed gear event listener
 d3.select('#fixed').on('input', function(){
     updateFixed(+this.value)
 })
-d3.select('#rotating').on('input', function(){
-    updateRotating(+this.value)
-})
-d3.select('#pen').on('input', function(){
-    updatePen(+this.value)
-})
-d3.select('#color').on('input', function(){
-    updateColor(this.value)
-    // console.log('color value', this.value)
-})
-updateFixed(230)
-updateRotating(100)
-updatePen(140)
-updateColor('#7fff00')
+// update fixed gear text display and value
 function updateFixed(fixed) {
     d3.select('#fixed-gear-value').text(fixed);
     d3.select('#fixed').property('value', fixed)
     // console.log('fixed', fixed)
 }
+// sets default fixed gear value
+updateFixed(230)
+
+// set rotating gear event listener 
+d3.select('#rotating').on('input', function(){
+    updateRotating(+this.value)
+})
+// update rotating gear text display and value
 function updateRotating(rotating) {
     d3.select('#rotating-gear-value').text(rotating);
     d3.select('#rotating').property('value', rotating)
     // console.log('rotating', rotating)
 }
+// set default for rotating gear
+updateRotating(100)
+
+
+// set pen position event listener
+d3.select('#pen').on('input', function(){
+    updatePen(+this.value)
+})
+// update pen position text display and value
 function updatePen(pen) {
     d3.select('#pen-variable-value').text(pen);
     d3.select('#pen').property('value', pen)
     // console.log('pen', pen)
 }
+// set default for pen position
+updatePen(140)
+
+// set color event listener 
+d3.select('#color').on('input', function(){
+    updateColor(this.value)
+    // console.log('color value', this.value)
+})
+// update color value
 function updateColor(color) {
     d3.select('#color').property('value', color)
     // console.log('color value', color)
 }
+// set default for color value
+updateColor('#7fff00')
+
+// event listener for draw spiro button 
 d3.select('#newspiro').on('click', function(){
     R = d3.select('#fixed').property('value');
     r = d3.select('#rotating').property('value');
@@ -92,22 +110,26 @@ d3.select('#newspiro').on('click', function(){
     console.log(R, r, d, color)
     drawSpiro()
 })
+// event listener for start over button
+d3.select('#removespiro').on('click', function(){
+    svg.selectAll('*').remove()
+})
 // function to plot the *spiro array*
 function getSpiroArray() {
     let spiroArray = []
     // Hypotrochoid
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-    //     x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
-    //     y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
+        x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+        y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
     
-    //     spiroArray.push({x: x, y: y})
-    // }
-    // Epitrochoid 
-    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
-        x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
-        y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
         spiroArray.push({x: x, y: y})
     }
+    // Epitrochoid 
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
+    //     x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
+    //     y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
+    //     spiroArray.push({x: x, y: y})
+    // }
 
     console.log('spiro-array', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
