@@ -9,7 +9,7 @@ let height = window.innerHeight;
 maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
 
-// add variables for inputs R, r, d, color, animation speed, stop, start, clear, play loop of spiros and max size? or at least size of the spiro
+// add variables for inputs R, r, d, color, clear svg, save svg
 // add inputs //https://bl.ocks.org/d3noob search for input examples
 //https://github.com/d3/d3-selection/blob/master/README.md#handling-events
 
