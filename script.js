@@ -4,10 +4,12 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 let width = window.innerWidth;
 let height = window.innerHeight;
 // add margins
+// add logic to variables for creating random spiro that does not exceed the window
+//create continuous feed before user starts or if they just wanna watch spiros
 maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
 
-// add variables for inputs R, r, d, color, animation speed, stop, start, clear, and max size? or at least size of the spiro
+// add variables for inputs R, r, d, color, animation speed, stop, start, clear, play loop of spiros and max size? or at least size of the spiro
 // add inputs //https://bl.ocks.org/d3noob search for input examples
 //https://github.com/d3/d3-selection/blob/master/README.md#handling-events
 
@@ -75,10 +77,10 @@ function lcm(num1, num2) {
 // console.log('lcm', helper)
 
 
+let spiroArray = []
 // function to plot the *spiro array*
 function getSpiroArray() {
 
-    let spiroArray = []
     let R = getRandomNumber(60, maxSize)
     let r = getRandomNumber(40, (R * 0.5))
     let d = getRandomNumber(5, R)
@@ -166,3 +168,5 @@ function drawSpiro() {
 setTimeout(function () {
     drawSpiro()
 }, 1000)
+
+svg.select('#form')
