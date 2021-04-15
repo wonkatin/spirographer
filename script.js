@@ -96,18 +96,18 @@ d3.select('#newspiro').on('click', function(){
 function getSpiroArray() {
     let spiroArray = []
     // Hypotrochoid
-    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-        x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
-        y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
-        
-        spiroArray.push({x: x, y: y})
-    }
-    // Epitrochoid 
-    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
-    //     x = 500 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
-    //     y = 400 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
+    // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
+    //     x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+    //     y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+    
     //     spiroArray.push({x: x, y: y})
     // }
+    // Epitrochoid 
+    for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
+        x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
+        y = 200 + (R+r) * Math.sin(theta) - d * Math.sin(((R+r)/r) * theta)
+        spiroArray.push({x: x, y: y})
+    }
 
     console.log('spiro-array', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
