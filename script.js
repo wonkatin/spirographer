@@ -48,11 +48,11 @@ function lcm(num1, num2) {
 // let d = 140
 
 // user inputs
-d3.select('#outer').on('input', function(){
-    updateOuter(+this.value)
+d3.select('#fixed').on('input', function(){
+    updateFixed(+this.value)
 })
-d3.select('#inner').on('input', function(){
-    updateInner(+this.value)
+d3.select('#rotating').on('input', function(){
+    updateRotating(+this.value)
 })
 d3.select('#pen').on('input', function(){
     updatePen(+this.value)
@@ -61,19 +61,19 @@ d3.select('#color').on('input', function(){
     updateColor(this.value)
     // console.log('color value', this.value)
 })
-updateOuter(230)
-updateInner(100)
+updateFixed(230)
+updateRotating(100)
 updatePen(140)
 updateColor('#7fff00')
-function updateOuter(outer) {
-    d3.select('#outer-gear-value').text(outer);
-    d3.select('#outer').property('value', outer)
-    // console.log('outer', outer)
+function updateFixed(fixed) {
+    d3.select('#fixed-gear-value').text(fixed);
+    d3.select('#fixed').property('value', fixed)
+    // console.log('fixed', fixed)
 }
-function updateInner(inner) {
-    d3.select('#inner-gear-value').text(inner);
-    d3.select('#inner').property('value', inner)
-    // console.log('inner', inner)
+function updateRotating(rotating) {
+    d3.select('#rotating-gear-value').text(rotating);
+    d3.select('#rotating').property('value', rotating)
+    // console.log('rotating', rotating)
 }
 function updatePen(pen) {
     d3.select('#pen-variable-value').text(pen);
@@ -85,8 +85,8 @@ function updateColor(color) {
     // console.log('color value', color)
 }
 d3.select('#newspiro').on('click', function(){
-    R = d3.select('#outer').property('value');
-    r = d3.select('#inner').property('value');
+    R = d3.select('#fixed').property('value');
+    r = d3.select('#rotating').property('value');
     d = d3.select('#pen').property('value');
     color = d3.select('#color').property('value');
     console.log(R, r, d, color)
