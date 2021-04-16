@@ -4,14 +4,11 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 let width = window.innerWidth;
 let height = window.innerHeight;
 // add margins
+// create global variable 
 // add logic to variables for creating random spiro that does not exceed the window
 //create continuous feed before user starts or if they just wanna watch spiros
 maxSize = Math.min((width/2.5), (height/2.5))
 console.log('max-size', maxSize)
-
-// add variables for inputs R, r, d, color, spiro style(2 styles), clear svg, save svg
-// add inputs //https://bl.ocks.org/d3noob search for input examples
-//https://github.com/d3/d3-selection/blob/master/README.md#handling-events
 
 // add ability to download or save
 
@@ -124,6 +121,7 @@ function getSpiroArray() {
     
         spiroArray.push({x: x, y: y})
     }
+    // 2 styles checkbox? second style not displaying for some reason 
     // Epitrochoid 
     // for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) { //https://www.wikiwand.com/en/Epitrochoid
     //     x = 300 + (R+r) * Math.cos(theta) - d * Math.cos(((R+r)/r) * theta)
@@ -131,7 +129,7 @@ function getSpiroArray() {
     //     spiroArray.push({x: x, y: y})
     // }
 
-    console.log('spiro-array', spiroArray.length)
+    console.log('spiro-array', spiroArray)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     console.log('R:', R, 'r:', r, 'd:', d)
     // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
@@ -164,8 +162,41 @@ function drawSpiro() {
 // setTimeout(function () {
 //     drawSpiro()
 // }, 1000)
-            
-            
+
+
+// SAVE SVG FILE // http://bl.ocks.org/curran/7cf9967028259ea032e8        
+// function svgDataURL(svg) {
+//     console.log(dataURL)
+//     return dataURL
+// }
+// event listener for button
+d3.select('#savespiro').on('click', function() {
+    console.log(svg.node())
+    let svgAsXML = (new XMLSerializer).serializeToString(svg.node());
+    let dataURL = "data:image/svg+xml," + encodeURIComponent(svgAsXML);
+
+    let dl = d3.select('#download'); 
+    
+    dl.attr("href", dataURL);
+    console.log(dataURL)
+    dl.attr("download", "test.svg");
+    dl.node().click();
+    return dataURL
+})            
+
+// var canvas = document.querySelector("canvas"),
+//     context = canvas.getContext("2d");
+
+// var image = new Image;
+// image.src = dataURL;
+// image.onload = function() {
+//     context.drawImage(image, 0, 0);
+
+//     var a = document.createElement("a");
+//     a.download = "fallback.png";
+//     a.href = canvas.toDataURL("image/png");
+//     a.click();
+// };
 //TEST RANGE INPUT
 // svg.append("circle")
 //     .attr("cx", 300)
