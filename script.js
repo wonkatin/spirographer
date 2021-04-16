@@ -179,7 +179,7 @@ d3.select('#savespiro').on('click', function() {
     
     dl.attr("href", dataURL);
     console.log(dataURL)
-    dl.attr("download", "test.svg");
+    dl.attr("download", "spiro.svg");
     dl.node().click();
     // return dataURL
 })            
@@ -197,6 +197,10 @@ d3.select('#savespiro').on('click', function() {
 //     a.href = canvas.toDataURL("image/png");
 //     a.click();
 // };
+
+
+
+
 //TEST RANGE INPUT
 // svg.append("circle")
 //     .attr("cx", 300)
