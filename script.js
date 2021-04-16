@@ -14,10 +14,13 @@ console.log('max-size', maxSize)
 // add ability to download or save
 
 //////////////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
-
+setTimeout(function () {
+    slideshow()
+}, 1000)
 // function to get random numbers between two numbers 
 function getRandomNumber(min, max) { // get random number between range
     return Math.round((Math.random()*(max-min)+min)/10)*10 ; // don't go under the min or over the max // return a multiple of 10
+    // return (Math.floor((Math.random() * (max-min))) + min);
 }
 
 // function to find lcm of R & r
@@ -39,41 +42,51 @@ let R = 0
 let r = 0
 let d = 0
 let color = ''
-
+let stopSlideshow = false;
 // SPIRO RANDOMIZER SLIDESHOW
 
-// global variable to set the interval
-// stop slideshow clears the interval
+// event listener for start slideshow button
+d3.select('#startrandom').on('click', function(){
+    stopSlideshow = false;
+    slideshow()
+})
 
-// start spiro randomizer when page loads, or button is clicked
-function randomSpirograph() {
+// event listener for stop slideshow button
+d3.select('#stoprandom').on('click', function(){
+    stopSlideshow = true;
+})
+
+function slideshow() {
     svg.selectAll('*').remove()
     R = getRandomNumber(10, (maxSize * .75))
     r = getRandomNumber(30, (R * 0.5))
     d = getRandomNumber(5, R)
     color = '#7fff00'
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
-    drawSpiro()
-    // d3.interval(drawSpiro(), 1000)
+    let computedSpiroArray = getSpiroArray()
+    let path = svg.append('path') //this is the path
+        .attr('fill', 'none') // not sure if i need this 
+        .style('stroke', color)
+        .attr('stroke-width', '2') // stroke is the color 
+        // .attr('d', line(spiroArray))
+        .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
+    
+    // let totalLength = Math.ceil(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
+    // let totalLength = Math.floor(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
+    let totalLength = Math.round(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
+    // let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
+    console.log('total path length', totalLength)
+    // let spiroSpeed = computedSpiroArray.length;
+    
+    path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
+        .attrTween('stroke-dasharray', function() { // https://github.com/d3/d3-transition#transition_attrTween
+            return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
+        }).transition().duration(2000).on('end', function(){
+            if(!stopSlideshow){
+                slideshow()
+            }
+        })
 }
-// setTimeout(function () {
-//     randomSpirograph()
-// }, 1000)
-
-
-// event listener for start slideshow button
-d3.select('#startrandom').on('click', function(){
-    // randomSpirograph()
-    setInterval(randomSpirograph, 4000)
-})
-// setInterval(randomSpirograph, 4000)
-
-// event listener for stop slideshow button
-d3.select('#stoprandom').on('click', function(){
-    interval.stop()
-})
-
-
 
 
 // user inputs
@@ -199,10 +212,6 @@ function drawSpiro() {
             return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
         })
 }
-// setTimeout(function () {
-//     drawSpiro()
-// }, 1000)
-
 
 // SAVE SVG FILE // http://bl.ocks.org/curran/7cf9967028259ea032e8        
 // SAVE SVG AS PNG https://bl.ocks.org/mbostock/6466603
