@@ -132,7 +132,7 @@ function getSpiroArray() {
     //     spiroArray.push({x: x, y: y})
     // }
 
-    console.log('spiro-array length', spiroArray.length)
+    console.log('number of spiro-array points', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     console.log('R:', R, 'r:', r, 'd:', d)
     // console.log('R: ' + R + ', r: ' + r + ', alpha: ' + alpha + ', l: ' + l + ', k: ' + k);
@@ -147,21 +147,22 @@ const line = d3.line()
 // define function that animates a path based on that line USING the *get spiro array* function
 
 function drawSpiro() {
+    let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
         .attr('stroke-width', '2') // stroke is the color 
         // .attr('d', line(spiroArray))
-        .attr('d', line(getSpiroArray())) // tells path where to draw the line using x & y coordinates 
+        .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
     // let totalLength = Math.ceil(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     // let totalLength = Math.floor(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     let totalLength = Math.round(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     // let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
     console.log('total path length', totalLength)
-    let spirospeed = totalLength;
-    //i think i can change the speed by making the duration dependent upon the length of the path or the number of plotted points
-    path.transition().duration(spirospeed).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
+    // let spiroSpeed = computedSpiroArray.length;
+    
+    path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
         .attrTween('stroke-dasharray', function() { // https://github.com/d3/d3-transition#transition_attrTween
             return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
         })
@@ -176,14 +177,14 @@ function drawSpiro() {
 // event listener for save spiro button
 d3.select('#savespiro').on('click', function() {
     //SAVE AS SVG
-    console.log('svg',svg.node())
+    // console.log('svg', svg.node())
     let svgAsXML = (new XMLSerializer).serializeToString(svg.node());
     let dataURL = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
 
     let dl = d3.select('#download'); 
     
     dl.attr('href', dataURL);
-    console.log('dataURL', dataURL)
+    // console.log('dataURL', dataURL)
     // dl.attr('download', 'spiro.svg');
     // dl.node().click();
 
