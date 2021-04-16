@@ -16,8 +16,8 @@ console.log('max-size', maxSize)
 //////////////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
 
 // function to get random numbers between two numbers 
-function getRandomNumber(start, end) { // get random number between range
-    return (Math.floor((Math.random() * (end-start))) + start); // don't go under the start or over the end
+function getRandomNumber(min, max) { // get random number between range
+    return Math.round((Math.random()*(max-min)+min)/10)*10 ; // don't go under the min or over the max // return a multiple of 10
 }
 
 // function to find lcm of R & r
@@ -41,25 +41,36 @@ let d = 0
 let color = ''
 
 // SPIRO RANDOMIZER SLIDESHOW
+
+// global variable to set the interval
+// stop slideshow clears the interval
+
 // start spiro randomizer when page loads, or button is clicked
 function randomSpirograph() {
-    R = getRandomNumber(60, 300)
-    r = getRandomNumber(40, (R * 0.5))
+    svg.selectAll('*').remove()
+    R = getRandomNumber(10, (maxSize * .75))
+    r = getRandomNumber(30, (R * 0.5))
     d = getRandomNumber(5, R)
     color = '#7fff00'
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     drawSpiro()
+    // d3.interval(drawSpiro(), 1000)
 }
 // setTimeout(function () {
 //     randomSpirograph()
 // }, 1000)
+
+
 // event listener for start slideshow button
 d3.select('#startrandom').on('click', function(){
-    randomSpirograph()
+    // randomSpirograph()
+    setInterval(randomSpirograph, 4000)
 })
+// setInterval(randomSpirograph, 4000)
+
 // event listener for stop slideshow button
 d3.select('#stoprandom').on('click', function(){
-    
+    interval.stop()
 })
 
 
@@ -156,8 +167,7 @@ function getSpiroArray() {
 
     console.log('number of spiro-array points', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
-    // console.log('R:', R, 'r:', r, 'd:', d)
-    // console.log('R: ' + R + ', r: ' + r + ', alpha: ' + alpha + ', l: ' + l + ', k: ' + k);
+    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     return spiroArray
 }
             
