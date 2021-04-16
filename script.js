@@ -181,7 +181,7 @@ d3.select('#savespiro').on('click', function() {
     console.log(dataURL)
     dl.attr("download", "test.svg");
     dl.node().click();
-    return dataURL
+    // return dataURL
 })            
 
 // var canvas = document.querySelector("canvas"),
