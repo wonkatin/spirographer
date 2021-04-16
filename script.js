@@ -43,13 +43,19 @@ let color = ''
 // SPIRO RANDOMIZER SLIDESHOW
 // start spiro randomizer when page loads, or button is clicked
 function randomSpirograph() {
-    R = getRandomNumber(60, maxSize)
+    R = getRandomNumber(60, 300)
     r = getRandomNumber(40, (R * 0.5))
     d = getRandomNumber(5, R)
+    color = '#7fff00'
+    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
+    drawSpiro()
 }
+// setTimeout(function () {
+//     randomSpirograph()
+// }, 1000)
 // event listener for start slideshow button
 d3.select('#startrandom').on('click', function(){
-    
+    randomSpirograph()
 })
 // event listener for stop slideshow button
 d3.select('#stoprandom').on('click', function(){
@@ -119,7 +125,7 @@ d3.select('#newspiro').on('click', function(){
     r = d3.select('#rotating').property('value');
     d = d3.select('#pen').property('value');
     color = d3.select('#color').property('value');
-    console.log(R, r, d, color)
+    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     drawSpiro()
 })
 
@@ -150,7 +156,7 @@ function getSpiroArray() {
 
     console.log('number of spiro-array points', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
-    console.log('R:', R, 'r:', r, 'd:', d)
+    // console.log('R:', R, 'r:', r, 'd:', d)
     // console.log('R: ' + R + ', r: ' + r + ', alpha: ' + alpha + ', l: ' + l + ', k: ' + k);
     return spiroArray
 }
