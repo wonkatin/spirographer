@@ -33,17 +33,31 @@ function lcm(num1, num2) {
     //return the number
     return i;
 }
-// let helper = lcm(3,5)
-// console.log('lcm', helper)
 
-// R: 230 r: 100 d: 137
+// global variables
+let R = 0
+let r = 0
+let d = 0
+let color = ''
 
-// let R = getRandomNumber(60, maxSize)
-// let r = getRandomNumber(40, (R * 0.5))
-// let d = getRandomNumber(5, R)
-// let R = 230
-// let r = 100
-// let d = 140
+// SPIRO RANDOMIZER SLIDESHOW
+// start spiro randomizer when page loads, or button is clicked
+function randomSpirograph() {
+    R = getRandomNumber(60, maxSize)
+    r = getRandomNumber(40, (R * 0.5))
+    d = getRandomNumber(5, R)
+}
+// event listener for start slideshow button
+d3.select('#startrandom').on('click', function(){
+    
+})
+// event listener for stop slideshow button
+d3.select('#stoprandom').on('click', function(){
+    
+})
+
+
+
 
 // user inputs
 // set fixed gear event listener
@@ -108,10 +122,12 @@ d3.select('#newspiro').on('click', function(){
     console.log(R, r, d, color)
     drawSpiro()
 })
+
 // event listener for start over button
 d3.select('#removespiro').on('click', function(){
     svg.selectAll('*').remove()
 })
+
 // function to plot the *spiro array*
 function getSpiroArray() {
     let spiroArray = []
