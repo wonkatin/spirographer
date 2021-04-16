@@ -3,6 +3,7 @@ const svg = d3.select('body').append('svg').attr('height','100%').attr('width','
 //
 let width = window.innerWidth;
 let height = window.innerHeight;
+console.log('width', width, 'height', height)
 // add margins
 // create global variable 
 // add logic to variables for creating random spiro that does not exceed the window
@@ -132,7 +133,7 @@ function getSpiroArray() {
     console.log('spiro-array', spiroArray)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     console.log('R:', R, 'r:', r, 'd:', d)
-    // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
+    // console.log('R: ' + R + ', r: ' + r + ', alpha: ' + alpha + ', l: ' + l + ', k: ' + k);
     return spiroArray
 }
             
@@ -155,7 +156,7 @@ function drawSpiro() {
     console.log('total length', totalLength)
     //i think i can change the speed by making the duration dependent upon the length of the path or the number of plotted points
     path.transition().duration(2000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
-    .attrTween("stroke-dasharray", function() { // https://github.com/d3/d3-transition#transition_attrTween
+    .attrTween('stroke-dasharray', function() { // https://github.com/d3/d3-transition#transition_attrTween
         return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
     })
 }
@@ -173,41 +174,41 @@ function drawSpiro() {
 d3.select('#savespiro').on('click', function() {
     console.log(svg.node())
     let svgAsXML = (new XMLSerializer).serializeToString(svg.node());
-    let dataURL = "data:image/svg+xml," + encodeURIComponent(svgAsXML);
+    let dataURL = 'data:image/svg+xml,' + encodeURIComponent(svgAsXML);
 
     let dl = d3.select('#download'); 
     
-    dl.attr("href", dataURL);
+    dl.attr('href', dataURL);
     console.log(dataURL)
-    dl.attr("download", "spiro.svg");
+    dl.attr('download', 'spiro.svg');
     dl.node().click();
     // return dataURL
 })            
 
-// var canvas = document.querySelector("canvas"),
-//     context = canvas.getContext("2d");
+var canvas = d3.select('#canvas'),
+    context = canvas.getContext('2d');
 
-// var image = new Image;
-// image.src = dataURL;
-// image.onload = function() {
-//     context.drawImage(image, 0, 0);
+var image = new Image;
+image.src = dataURL;
+image.onload = function() {
+    context.drawImage(image, 0, 0);
 
-//     var a = document.createElement("a");
-//     a.download = "fallback.png";
-//     a.href = canvas.toDataURL("image/png");
-//     a.click();
-// };
+    var a = document.createElement('a');
+    a.download = 'fallback.png';
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+};
 
 
 
 
 //TEST RANGE INPUT
-// svg.append("circle")
-//     .attr("cx", 300)
-//     .attr("cy", 150) 
-//     .style("fill", "none")   
-//     .style("stroke", "chartreuse") 
-//     .attr("r", 120);
+// svg.append('circle')
+//     .attr('cx', 300)
+//     .attr('cy', 150) 
+//     .style('fill', 'none')   
+//     .style('stroke', 'chartreuse') 
+//     .attr('r', 120);
 
 // d3.select('#nRadius').on('input', function(){
 //     update(+this.value)
@@ -226,7 +227,7 @@ d3.select('#savespiro').on('click', function() {
 //     .text('hello from the svg element')
 //     .attr('x', 100)
 //     .attr('y', 100)
-//     .attr("fill", "white")
+//     .attr('fill', 'white')
 //TEST
 // svg.append('line') 
 //     .attr('x1', 100)
@@ -250,7 +251,7 @@ d3.select('#savespiro').on('click', function() {
 //     let totalLength = path.node().getTotalLength()
 //     console.log(totalLength)
 //     path.transition().duration(2000).ease(d3.easeLinear)
-//         .attrTween("stroke-dasharray", function() {
+//         .attrTween('stroke-dasharray', function() {
 //             return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`);
 //         })
 
@@ -318,6 +319,6 @@ d3.select('#savespiro').on('click', function() {
     // console.log('spiro-array', spiroArray)
     // // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     // console.log('R:', R, 'r:', r, 'd:', d)
-    // // console.log("R: " + R + ", r: " + r + ", alpha: " + alpha + ", l: " + l + ", k: " + k);
+    // // console.log('R: ' + R + ', r: ' + r + ', alpha: ' + alpha + ', l: ' + l + ', k: ' + k);
     // return spiroArray
 // }
