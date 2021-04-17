@@ -28,7 +28,26 @@
 .hidden { 
   display: none; 
 }
-
+.sliders {
+  text-align: right;
+  padding-top: 4rem;
+}
+.header {
+  margin-left: 4rem;
+}
+.color {
+  display: flex;
+  justify-content: flex-end;
+}
+#color {
+  margin-left: 1rem;
+}
+input[type=range] {
+  color: purple
+}
+/* div {
+  height: 100%
+} */
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {

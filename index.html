@@ -17,23 +17,18 @@
 
 </head>
 <body>
-    <header>
-        <h1>SPIROGRAPHER</h1>
-    </header>
-    <div >
-        <div class="container">
-            <button id="newspiro">draw spiro</button>
-            <button id="removespiro">clear screen</button>
-            <button id="savespiro">save spirograph</button>
-            <button id="startrandom">start slideshow</button>
-            <button id="stoprandom">stop slideshow</button>
-            <a id="download" href=""></a>
-            <div id='canvas'></div>
+    <div class="row">
+        <div class="offset-by-one columns">
+            <h1>SPIROGRAPHER</h1>
         </div>
+
+    </div>
+    <div >
+
         <div class="row">
-            <div class="columns three">
-                <div>
-                    <label for="color">pick a color: </label>
+            <div class="columns two sliders">
+                <div class="color">
+                    <label for="color">pick a color:</label>
                     <input type="color" id="color">
                 </div>
                 <div>
@@ -50,11 +45,20 @@
                 </div>
     
             </div>
-
-            <div class='columns nine' id="svg">
-                
+            <div class="columns ten">
+                <div >
+                    <button id="newspiro">draw spiro</button>
+                    <button id="removespiro">clear screen</button>
+                    <button id="savespiro">save spirograph</button>
+                    <button id="startrandom">start slideshow</button>
+                    <button id="stoprandom">stop slideshow</button>
+                    <a id="download" href=""></a>
+                    <div id='canvas'></div>
+                </div>
+                <div id="svg">
+                    
+                </div>
             </div>
-
         </div>
     </div>
     <script type="text/javascript" src="./script.js"></script>

@@ -1,6 +1,7 @@
 // svg element
 const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
 //
+console.log('svg height', svg.node().height)
 let width = window.innerWidth;
 let height = window.innerHeight;
 console.log('width', width, 'height', height)
@@ -173,8 +174,8 @@ function getSpiroArray() {
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
     // for (let theta = 0; theta <= Math.floor((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
     // for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-        x = 500 + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
-        y = 400 + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+        x =  200+ (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+        y =  200+ (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
     
         spiroArray.push({x: x, y: y})
     }
