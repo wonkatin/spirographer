@@ -73,7 +73,7 @@ function slideshow() {
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '5') // stroke is the color 
+        .attr('stroke-width', '3') // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
@@ -204,7 +204,7 @@ function drawSpiro() {
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '7') // stroke is the color 
+        .attr('stroke-width', '3') // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
