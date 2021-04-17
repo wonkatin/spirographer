@@ -63,6 +63,11 @@ function slideshow() {
     r = getRandomNumber(30, (R * 0.5))
     d = getRandomNumber(5, R)
     color = '#7fff00'
+    // dynamically update range inputs (appears on screen like magic)
+    updateFixed(R)
+    updateRotating(r)
+    updatePen(d)
+    updateColor('#7fff00')
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
@@ -104,6 +109,7 @@ function updateFixed(fixed) {
 // sets default fixed gear value
 updateFixed(230)
 
+
 // set rotating gear event listener 
 d3.select('#rotating').on('input', function(){
     updateRotating(+this.value)
@@ -130,6 +136,7 @@ function updatePen(pen) {
 }
 // set default for pen position
 updatePen(140)
+
 
 // set color event listener 
 d3.select('#color').on('input', function(){
