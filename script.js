@@ -5,7 +5,8 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 console.log('width', width, 'height', height)
 // add margins
-// create global variable 
+// add random color generator 
+// update duration to be relative ratio of time vs points in spiro array
 // add logic to variables for creating random spiro that does not exceed the window
 //create continuous feed before user starts or if they just wanna watch spiros
 maxSize = Math.min((width/2.5), (height/2.5))

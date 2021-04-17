@@ -3,48 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
-    <script src="https://d3js.org/d3.v6.js"></script>
-
     <title>Spirographer</title>
+    <meta name="description" content="Spirograph generator using D3.js">
+    <meta name="author" content="Sarah Marie Coogan">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet"> -->
+    <link rel="stylesheet" href="./css/normalize.css">
+    <link rel="stylesheet" href="./css/skeleton.css">
+    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <link rel="icon" type="image/png" href="./images/favicon.png">
+
 </head>
 <body>
-    <h1>hello from spirographer</h1>
-    <!-- <p>
-        <label for="nRadius" 
-               style="display: inline-block; width: 240px; text-align: right">
-               radius: <span id="nRadius-value">…</span>
-        </label>
-        <input type="range" min="1" max="150" id="nRadius">
-    </p> -->
+    <div class='container'>
+        <div class='row'>
+            
+       
 
-    <!-- <form id="form"> -->
 
-        <label for="fixed">fixed gear: <span id="fixed-gear-value">...</span></label>
-        <input type="range" min="10" max="300" id="fixed" step="5">
 
-        <label for="rotating">rotating gear: <span id="rotating-gear-value">...</span></label>
-        <input type="range" min="30" max="300" id="rotating" step="5">
-
-        <label for="pen">pen position: <span id="pen-variable-value">...</span></label>
-        <input type="range" min="5" max="300" id="pen" step="10">
-
-        <label for="color">pick a color: </label>
-        <input type="color" id="color">
-
-        <!-- <input type="submit" value="draw spiro"> -->
-        <button id="newspiro">draw spiro</button>
-        <button id="removespiro">start over</button>
-        <button id="savespiro">save spirograph</button>
-        <button id="startrandom">start slideshow</button>
-        <button id="stoprandom">stop slideshow</button>
-        <a id="download" href=""></a>
-        <div id='canvas'></div>
-        <!-- <canvas width="640" height="3250"></canvas> -->
-
-    <!-- </form> -->
     
+            <h1>hello from spirographer</h1>
+
+
+            
+
+            <label for="fixed">fixed gear: <span id="fixed-gear-value">...</span></label>
+            <input type="range" min="10" max="300" id="fixed" step="5">
+
+            <label for="rotating">rotating gear: <span id="rotating-gear-value">...</span></label>
+            <input type="range" min="30" max="300" id="rotating" step="5">
+
+            <label for="pen">pen position: <span id="pen-variable-value">...</span></label>
+            <input type="range" min="5" max="300" id="pen" step="10">
+
+            <label for="color">pick a color: </label>
+            <input type="color" id="color">
+
+            
+            <button id="newspiro">draw spiro</button>
+            <button id="removespiro">start over</button>
+            <button id="savespiro">save spirograph</button>
+            <button id="startrandom">start slideshow</button>
+            <button id="stoprandom">stop slideshow</button>
+            <a id="download" href=""></a>
+            <div id='canvas'></div>
+            <!-- <canvas width="640" height="3250"></canvas> -->
+        </div>
+    
+    </div>
     <script type="text/javascript" src="./script.js"></script>
 </body>
 </html>
