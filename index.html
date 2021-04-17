@@ -17,32 +17,11 @@
 
 </head>
 <body>
-    <div class='container'>
-        <div class='row'>
-            
-       
-
-
-
-    
-            <h1>hello from spirographer</h1>
-
-
-            
-
-            <label for="fixed">fixed gear: <span id="fixed-gear-value">...</span></label>
-            <input type="range" min="10" max="300" id="fixed" step="5">
-
-            <label for="rotating">rotating gear: <span id="rotating-gear-value">...</span></label>
-            <input type="range" min="30" max="300" id="rotating" step="5">
-
-            <label for="pen">pen position: <span id="pen-variable-value">...</span></label>
-            <input type="range" min="5" max="300" id="pen" step="10">
-
-            <label for="color">pick a color: </label>
-            <input type="color" id="color">
-
-            
+    <header>
+        <h1>SPIROGRAPHER</h1>
+    </header>
+    <div >
+        <div class="container">
             <button id="newspiro">draw spiro</button>
             <button id="removespiro">clear screen</button>
             <button id="savespiro">save spirograph</button>
@@ -50,9 +29,33 @@
             <button id="stoprandom">stop slideshow</button>
             <a id="download" href=""></a>
             <div id='canvas'></div>
-            <!-- <canvas width="640" height="3250"></canvas> -->
         </div>
+        <div class="row">
+            <div class="columns three">
+                <div>
+                    <label for="color">pick a color: </label>
+                    <input type="color" id="color">
+                </div>
+                <div>
+                    <label for="fixed">fixed gear: <span id="fixed-gear-value">...</span></label>
+                    <input type="range" min="10" max="300" id="fixed" step="5">
+                </div>
+                <div>
+                    <label for="rotating">rotating gear: <span id="rotating-gear-value">...</span></label>
+                    <input type="range" min="30" max="300" id="rotating" step="5">
+                </div>
+                <div>
+                    <label for="pen">pen position: <span id="pen-variable-value">...</span></label>
+                    <input type="range" min="5" max="300" id="pen" step="10">
+                </div>
     
+            </div>
+
+            <div class='columns nine' id="svg">
+                
+            </div>
+
+        </div>
     </div>
     <script type="text/javascript" src="./script.js"></script>
 </body>

@@ -1,5 +1,5 @@
 // svg element
-const svg = d3.select('body').append('svg').attr('height','100%').attr('width','100%')
+const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
 //
 let width = window.innerWidth;
 let height = window.innerHeight;
