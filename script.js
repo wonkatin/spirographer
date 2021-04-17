@@ -81,7 +81,7 @@ function slideshow() {
     path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
         .attrTween('stroke-dasharray', function() { // https://github.com/d3/d3-transition#transition_attrTween
             return d3.interpolate(`0,${totalLength}`, `${totalLength},${totalLength}`); // https://observablehq.com/@palewire/svg-path-animations-d3-transition
-        }).transition().duration(2000).on('end', function(){
+        }).transition().duration(3000).on('end', function(){
             if(!stopSlideshow){
                 slideshow()
             }
