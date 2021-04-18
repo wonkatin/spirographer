@@ -63,18 +63,18 @@ function slideshow() {
     R = getRandomNumber(10, (maxSize * .75))
     r = getRandomNumber(30, (R * 0.5))
     d = getRandomNumber(5, R)
-    color = '#7fff00'
+    color = '#0A5AFF'
     // dynamically update range inputs (appears on screen like magic)
     updateFixed(R)
     updateRotating(r)
     updatePen(d)
-    updateColor('#7fff00')
+    updateColor(color)
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '3') // stroke is the color 
+        .attr('stroke-width', '2') // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
@@ -108,7 +108,7 @@ function updateFixed(fixed) {
     // console.log('fixed', fixed)
 }
 // sets default fixed gear value
-updateFixed(230)
+// updateFixed(230)
 
 
 // set rotating gear event listener 
@@ -122,7 +122,7 @@ function updateRotating(rotating) {
     // console.log('rotating', rotating)
 }
 // set default for rotating gear
-updateRotating(100)
+// updateRotating(100)
 
 
 // set pen position event listener
@@ -136,7 +136,7 @@ function updatePen(pen) {
     // console.log('pen', pen)
 }
 // set default for pen position
-updatePen(140)
+// updatePen(140)
 
 
 // set color event listener 
@@ -150,7 +150,7 @@ function updateColor(color) {
     // console.log('color value', color)
 }
 // set default for color value
-updateColor('#7fff00')
+updateColor('#0A5AFF')
 
 // event listener for draw spiro button 
 d3.select('#newspiro').on('click', function(){
@@ -205,7 +205,7 @@ function drawSpiro() {
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '3') // stroke is the color 
+        .attr('stroke-width', '2') // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     

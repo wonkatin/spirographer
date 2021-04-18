@@ -32,22 +32,27 @@
   text-align: right;
   padding-top: 4rem;
 }
-.header {
-  margin-left: 4rem;
-}
-.color {
-  display: flex;
-  justify-content: flex-end;
-}
+
 #color {
   margin-left: 1rem;
 }
-input[type=range] {
-  color: purple
+.end {
+  justify-self: end;
 }
-/* div {
-  height: 100%
-} */
+.between {
+  display: flex;
+  justify-content: space-between;
+
+}
+#svg {
+  height: 100vh;
+  margin-top: 4rem;
+}
+input[type="range"] {
+  width: 100%;
+  min-width: 100px;
+}
+
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
@@ -145,12 +150,14 @@ html {
 body {
   height: 100vh;
   margin: 10px 20px 0px 20px;
-  
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #222; 
+  color: #6d2cab; 
+  background-color: rgb(202, 198, 206);
+  text-transform: uppercase;
+
 }
 
 
@@ -199,9 +206,9 @@ input[type="button"] {
   display: inline-block;
   height: 38px;
   padding: 0 30px;
-  color: #555;
+  color: #8e4bcd;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   line-height: 38px;
   letter-spacing: .1rem;
@@ -210,7 +217,7 @@ input[type="button"] {
   white-space: nowrap;
   background-color: transparent;
   border-radius: 4px;
-  border: 1px solid #bbb;
+  border: 1px solid #8e4bcd;
   cursor: pointer;
   box-sizing: border-box; }
 .button:hover,
@@ -223,8 +230,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-  color: #333;
-  border-color: #888;
+  color: #ffffff;
+  border-color: #ffffff;
   outline: 0; }
 .button.button-primary,
 button.button-primary,
