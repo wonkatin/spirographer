@@ -113,12 +113,15 @@ function slideshow() {
     updateRotating(r)
     updatePen(d)
     updateColor(color)
+    let randoColor = randomColor()
+    updateColor(randoColor)
     updateStroke(stroke)
+
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
-        .style('stroke', randomColor)
+        .style('stroke', randoColor)
         // .style('fill', randomColor) // this is the best bug by far! **********
         .attr('stroke-width', stroke) // stroke is the color 
         // .attr('d', line(spiroArray))
@@ -129,6 +132,8 @@ function slideshow() {
     let totalLength = Math.round(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     // let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
     console.log('total path length', totalLength)
+    // console.log('random color', randomColor())
+    
     // let spiroSpeed = computedSpiroArray.length;
     
     path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
