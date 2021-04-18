@@ -23,7 +23,12 @@ setTimeout(function () {
 function getRandomNumber(min, max) { // get random number between range
     return Math.round((Math.random()*(max-min)+min)/10)*10 ; // don't go under the min or over the max // return a multiple of 10
     // return (Math.floor((Math.random() * (max-min))) + min);
+
 }
+function getRandomSmallNumber(min, max) {
+    return Math.round(Math.random()*(max-min)+min)
+}
+
 
 // function to find lcm of R & r
 function lcm(num1, num2) {
@@ -44,6 +49,7 @@ let R = 0
 let r = 0
 let d = 0
 let color = ''
+let stroke = 0
 let stopSlideshow = false;
 // SPIRO RANDOMIZER SLIDESHOW
 
@@ -64,17 +70,19 @@ function slideshow() {
     r = getRandomNumber(30, (R * 0.5))
     d = getRandomNumber(5, R)
     color = '#0A5AFF'
+    stroke = getRandomSmallNumber(1,6)
     // dynamically update range inputs (appears on screen like magic)
     updateFixed(R)
     updateRotating(r)
     updatePen(d)
     updateColor(color)
+    updateStroke(stroke)
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '2') // stroke is the color 
+        .attr('stroke-width', stroke) // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
@@ -152,12 +160,26 @@ function updateColor(color) {
 // set default for color value
 updateColor('#0A5AFF')
 
+// set line stroke event listener
+d3.select('#stroke').on('input', function(){
+    updateStroke(+this.value)
+})
+// update line stroke display and value
+function updateStroke(stroke) {
+    d3.select('#stroke-value').text(stroke);
+    d3.select('#stroke').property('value', stroke)
+    console.log('stroke', stroke)
+}
+// sets default line stroke value
+updateStroke(2)
+
 // event listener for draw spiro button 
 d3.select('#newspiro').on('click', function(){
     R = d3.select('#fixed').property('value');
     r = d3.select('#rotating').property('value');
     d = d3.select('#pen').property('value');
     color = d3.select('#color').property('value');
+    stroke = d3.select('#stroke').property('value')
     console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     drawSpiro()
 })
@@ -205,7 +227,7 @@ function drawSpiro() {
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
         .style('stroke', color)
-        .attr('stroke-width', '2') // stroke is the color 
+        .attr('stroke-width', stroke) // stroke is the color 
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
