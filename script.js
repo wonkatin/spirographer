@@ -4,6 +4,7 @@ const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','
 console.log('svg height', svg.node().height)
 let width = window.innerWidth;
 let height = window.innerHeight;
+
 console.log('width', width, 'height', height)
 // add margins
 // add random color generator 
@@ -103,9 +104,19 @@ var randomColor = (function(){
 // function for random spirograph 
 function slideshow() {
     svg.selectAll('*').remove()
-    R = getRandomNumber(10, (maxSize * .75))
-    r = getRandomNumber(30, (R * 0.5))
-    d = getRandomNumber(5, R)
+    if (height >= 400 && width >= 400 ) {
+        R = getRandomNumber(10, 400)
+        r = getRandomNumber(30, 300)
+        d = getRandomNumber(1, 300)
+    } else if (height >= 300 && width >= 300 ) {
+        R = getRandomNumber(10, 300)
+        r = getRandomNumber(30, 200)
+        d = getRandomNumber(1, 200)
+    } else {
+        R = getRandomNumber(10, 200)
+        r = getRandomNumber(30, 100)
+        d = getRandomNumber(1, 100)
+    }
     color = '#0A5AFF'
     stroke = getRandomSmallNumber(1,6)
     // dynamically update range inputs (appears on screen like magic)
@@ -232,15 +243,29 @@ d3.select('#removespiro').on('click', function(){
     svg.selectAll('*').remove()
 })
 
+
 // function to plot the *spiro array*
 function getSpiroArray() {
     let spiroArray = []
+    let h 
+    let w  
+    let total = R + r + d
+    console.log('total', total)
+
+    if (total >= 300) {
+        h = height/2
+        w = width/2
+    } else {
+        h = height/3
+        w = width/3
+    }
+    console.log('w, h', w, h)
     // Hypotrochoid
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
     // for (let theta = 0; theta <= Math.floor((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
     // for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-        x =  200+ (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
-        y =  200+ (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
+        x = w + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
+        y = h + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
     
         spiroArray.push({x: x, y: y})
     }
