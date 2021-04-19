@@ -272,7 +272,7 @@ let fillColor
 function updateFillColor(color) {
     d3.select('#colorfill').property('value', color)
     fillColor = color
-    console.log('color value', fillColor)
+    // console.log('color value', fillColor)
 }
 // set default for color value
 updateFillColor('#0A5AFF')
