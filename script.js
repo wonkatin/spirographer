@@ -214,7 +214,7 @@ d3.select('#stroke').on('input', function(){
 function updateStroke(stroke) {
     d3.select('#stroke-value').text(stroke);
     d3.select('#stroke').property('value', stroke)
-    console.log('stroke', stroke)
+    // console.log('stroke', stroke)
 }
 // sets default line stroke value
 // updateStroke(2)
@@ -235,6 +235,21 @@ d3.select('#removespiro').on('click', function(){
     svg.selectAll('*').remove()
 })
 
+// event listener for dark mode
+
+d3.select('#darkmode').on('click', function(){
+    let background = d3.select('body').style('background-color')
+    console.log(background)
+    if (background === 'rgb(202, 198, 206)') {
+        d3.select('body').style('background-color', 'rgb(46, 45, 46)')
+        d3.select(this).text('light mode')
+    }
+    if (background === 'rgb(46, 45, 46)') {
+        d3.select('body').style('background-color', 'rgb(202, 198, 206)')
+        d3.select(this).text('dark mode')
+    }
+    
+})
 
 // function to plot the *spiro array*
 function getSpiroArray() {
