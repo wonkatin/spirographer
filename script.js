@@ -294,6 +294,12 @@ d3.select('#fill').on('click', function(){
     svg.select('path').style('fill', fillColor)
 })
 
+// event listener to remove fill button
+d3.select('#removefill').on('click', function(){
+    svg.select('path').style('fill', 'none')
+    
+})
+
 // event listener to remove lines button
 d3.select('#removelines').on('click', function(){
     svg.select('path').style('stroke', 'none')
