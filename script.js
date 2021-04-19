@@ -106,7 +106,9 @@ function slideshow() {
         r = getRandomNumber(30, 250)
         d = getRandomNumber(40, 250)
     }
-
+    if (r===R){
+        R += 10
+    }
     color = '#0A5AFF'
     stroke = getRandomSmallNumber(1,6)
     // dynamically update range inputs (appears on screen like magic)
@@ -153,12 +155,14 @@ if (width <= 500) {
     d3.select('#fixed').property('max', '80').property('min', '10')
     d3.select('#rotating').property('max', '80').property('min', '30')
     d3.select('#pen').property('max', '80').property('min', '1')
+    d3.selectAll('button').style('padding', '0px 10px')
 } 
 if (width <= 1500) {
     d3.select('#fixed').property('max', '150').property('min', '60')
     d3.select('#rotating').property('max', '150').property('min', '30')
     d3.select('#pen').property('max', '150').property('min', '40')
-    d3.selectAll('button').style('padding', '0px 10px')
+    d3.selectAll('button').style('padding', '0px 20px')
+   
 } else {
     d3.select('#fixed').property('max', '300').property('min', '10')
     d3.select('#rotating').property('max', '250').property('min', '30')
@@ -254,10 +258,10 @@ d3.select('#darkmode').on('click', function(){
     let background = d3.select('body').style('background-color')
     console.log(background)
     if (background === 'rgb(202, 198, 206)') {
-        d3.select('body').style('background-color', 'rgb(46, 45, 46)')
+        d3.select('body').style('background-color', 'rgb(31, 30, 34)')
         d3.select(this).text('light mode')
     }
-    if (background === 'rgb(46, 45, 46)') {
+    if (background === 'rgb(31, 30, 34)') {
         d3.select('body').style('background-color', 'rgb(202, 198, 206)')
         d3.select(this).text('dark mode')
     }
