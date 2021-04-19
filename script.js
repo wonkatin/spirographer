@@ -1,11 +1,13 @@
+// variables for width x height
 let width = window.innerWidth;
 let height = window.innerHeight;
-console.log('width', width, 'height', height)
+// console.log('width', width, 'height', height)
 
 // svg element
 const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
 
-//////////////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
+//////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
+// start slideshow
 setTimeout(function () {
     slideshow()
 }, 1000)
@@ -40,7 +42,8 @@ let d = 0
 let color = ''
 let stroke = 0
 let stopSlideshow = false;
-// SPIRO RANDOMIZER SLIDESHOW
+
+
 
 // event listener for start slideshow button
 d3.select('#startrandom').on('click', function(){
@@ -89,9 +92,10 @@ var randomColor = (function(){
     };
   })();
 
-// function for random spirograph 
+// function for random spirograph slideshow 
 function slideshow() {
     svg.selectAll('*').remove()
+    // trying to keep the spirograph on the page
     if (width <= 500) {
         R = getRandomNumber(10, 80)
         r = getRandomNumber(30, 80)
@@ -120,7 +124,7 @@ function slideshow() {
     updateColor(randoColor)
     updateStroke(stroke)
 
-    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
+    // console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     let computedSpiroArray = getSpiroArray()
     let path = svg.append('path') //this is the path
         .attr('fill', 'none') // not sure if i need this 
@@ -130,14 +134,11 @@ function slideshow() {
         // .attr('d', line(spiroArray))
         .attr('d', line(computedSpiroArray)) // tells path where to draw the line using x & y coordinates 
     
-    // let totalLength = Math.ceil(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
-    // let totalLength = Math.floor(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     let totalLength = Math.round(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
-    // let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
-    console.log('total path length', totalLength)
+ 
+    // console.log('total path length', totalLength)
     // console.log('random color', randomColor())
     
-    // let spiroSpeed = computedSpiroArray.length;
     
     path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
         .attrTween('stroke-dasharray', function() { // https://github.com/d3/d3-transition#transition_attrTween
@@ -180,7 +181,6 @@ function updateFixed(fixed) {
 }
 // sets default fixed gear value
 // updateFixed(230)
-
 
 // set rotating gear event listener 
 d3.select('#rotating').on('input', function(){
@@ -243,7 +243,7 @@ d3.select('#newspiro').on('click', function(){
     d = d3.select('#pen').property('value');
     color = d3.select('#color').property('value');
     stroke = d3.select('#stroke').property('value')
-    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
+    // console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
     drawSpiro()
 })
 
@@ -256,7 +256,6 @@ d3.select('#removespiro').on('click', function(){
 
 d3.select('#darkmode').on('click', function(){
     let background = d3.select('body').style('background-color')
-    console.log(background)
     if (background === 'rgb(202, 198, 206)') {
         d3.select('body').style('background-color', 'rgb(31, 30, 34)')
         d3.select(this).text('light mode')
@@ -267,6 +266,40 @@ d3.select('#darkmode').on('click', function(){
     }
     
 })
+
+let fillColor
+// update color value
+function updateFillColor(color) {
+    d3.select('#colorfill').property('value', color)
+    fillColor = color
+    console.log('color value', fillColor)
+}
+// set default for color value
+updateFillColor('#0A5AFF')
+
+// set fill color event listener 
+
+
+d3.select('#colorfill').on('input', function(){
+    updateFillColor(this.value)
+    // fillColor = this.value
+    
+})
+
+// event listener for the fill button 
+d3.select('#fill').on('click', function(){
+    // d3.select('#colorfill').property('value', color)
+    // console.log(color)
+        // .style('fill', randomColor) // this is the best bug by far! **********
+    svg.select('path').style('fill', fillColor)
+})
+
+// event listener to remove lines button
+d3.select('#removelines').on('click', function(){
+    svg.select('path').style('stroke', 'none')
+    
+})
+
 
 // function to plot the *spiro array*
 function getSpiroArray() {
@@ -286,11 +319,10 @@ function getSpiroArray() {
     }
 
 
-    console.log('w, h', w, h)
+    // console.log('w, h', w, h)
     // Hypotrochoid
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-    // for (let theta = 0; theta <= Math.floor((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
-    // for (let theta = 0; theta <= (2 * Math.PI) * (lcm(R,r)/R); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
+
         x = w + (R-r) * Math.cos(theta) + d * Math.cos(((R-r)/r) * theta)
         y = h + (R-r) * Math.sin(theta) - d * Math.sin(((R-r)/r) * theta)
     
@@ -304,9 +336,9 @@ function getSpiroArray() {
     //     spiroArray.push({x: x, y: y})
     // }
 
-    console.log('number of spiro-array points', spiroArray.length)
+    // console.log('number of spiro-array points', spiroArray.length)
     // console.log('R:', R, 'r:', r, 'd:', d, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
-    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
+    // console.log('R:', R, 'r:', r, 'd:', d, 'color:', color, 'LCM:', lcm(R,r), 'max-theta', Math.ceil((2 * Math.PI) * (lcm(R,r)/R)))
     return spiroArray
 }
             
@@ -330,7 +362,7 @@ function drawSpiro() {
     // let totalLength = Math.floor(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     let totalLength = Math.round(path.node().getTotalLength()) // needs to know the entire length of the line for lines below to work
     // let totalLength = path.node().getTotalLength() // needs to know the entire length of the line for lines below to work
-    console.log('total path length', totalLength)
+    // console.log('total path length', totalLength)
     // let spiroSpeed = computedSpiroArray.length;
     
     path.transition().duration(5000).ease(d3.easeLinear) // transitions create animations by rendering element over a duration of time
