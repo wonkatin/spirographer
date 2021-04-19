@@ -1,22 +1,9 @@
 let width = window.innerWidth;
 let height = window.innerHeight;
-// svg element
-
-
-const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
-//
-
-
 console.log('width', width, 'height', height)
-// add margins
-// add random color generator 
-// update duration to be relative ratio of time vs points in spiro array
-// add logic to variables for creating random spiro that does not exceed the window
-//create continuous feed before user starts or if they just wanna watch spiros
-// maxSize = Math.min((width/2.5), (height/2.5))
-// console.log('max-size', maxSize)
 
-// add ability to download or save
+// svg element
+const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
 
 //////////////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
 setTimeout(function () {
@@ -31,7 +18,6 @@ function getRandomNumber(min, max) { // get random number between range
 function getRandomSmallNumber(min, max) {
     return Math.round(Math.random()*(max-min)+min)
 }
-
 
 // function to find lcm of R & r
 function lcm(num1, num2) {
@@ -106,9 +92,21 @@ var randomColor = (function(){
 // function for random spirograph 
 function slideshow() {
     svg.selectAll('*').remove()
-    R = getRandomNumber(10, 400)
-    r = getRandomNumber(30, 300)
-    d = getRandomNumber(1, 300)
+    if (width <= 500) {
+        R = getRandomNumber(10, 80)
+        r = getRandomNumber(30, 80)
+        d = getRandomNumber(1, 80)
+    } 
+    if (width <= 1500) {
+        R = getRandomNumber(60, 150)
+        r = getRandomNumber(30, 150)
+        d = getRandomNumber(40, 150)
+    } else {
+        R = getRandomNumber(10, 400)
+        r = getRandomNumber(30, 300)
+        d = getRandomNumber(40, 305)
+    }
+
     color = '#0A5AFF'
     stroke = getRandomSmallNumber(1,6)
     // dynamically update range inputs (appears on screen like magic)
@@ -151,6 +149,20 @@ function slideshow() {
 
 
 // user inputs
+if (width <= 500) {
+    d3.select('#fixed').property('max', '80').property('min', '10')
+    d3.select('#rotating').property('max', '80').property('min', '30')
+    d3.select('#pen').property('max', '80').property('min', '1')
+} 
+if (width <= 1500) {
+    d3.select('#fixed').property('max', '150').property('min', '60')
+    d3.select('#rotating').property('max', '150').property('min', '30')
+    d3.select('#pen').property('max', '150').property('min', '40')
+} else {
+    d3.select('#fixed').property('max', '400').property('min', '10')
+    d3.select('#rotating').property('max', '300').property('min', '30')
+    d3.select('#pen').property('max', '305').property('min', '40')
+}
 // set fixed gear event listener
 d3.select('#fixed').on('input', function(){
     updateFixed(+this.value)
@@ -255,17 +267,20 @@ d3.select('#darkmode').on('click', function(){
 function getSpiroArray() {
     let spiroArray = []
     let h 
-    let w  
-    let total = R + r + d
-    console.log('total', total)
-
-    if (total >= 300) {
+    let w 
+    if (width <= 500) {
         h = height/2
         w = width/2
-    } else {
-        h = height/3
+    } 
+    if (width <= 1500) {
+        h = height/2.5
         w = width/3
+    } else {
+        h = height/2
+        w = width/3.5
     }
+
+
     console.log('w, h', w, h)
     // Hypotrochoid
     for (let theta = 0; theta <= Math.ceil((2 * Math.PI) * (lcm(R,r)/R)); theta += .01) {  //https://www.wikiwand.com/en/Hypotrochoid
