@@ -24,7 +24,10 @@
 - Clearing
 - Media Queries
 */
-
+#svg{
+  margin: 0px;
+  height: 100vh
+}
 .hidden { 
   display: none; 
 }
@@ -49,7 +52,7 @@ input[type="range"] {
   min-width: 100px;
 }
 #no-margin {
-  margin-left: 0;
+
   margin-right: 0;
 }
 
@@ -437,40 +440,25 @@ there.
 
 /* Larger than mobile */
 @media (min-width: 400px) {
-  #svg {
-    height: 400px;
-    width: 400px;
-  }
+
 }
 
 /* Larger than phablet (also point when grid becomes active) */
 @media (min-width: 550px) {
-  #svg {
-    height: 550px;
-    width: 550px;
-  }
+
 }
 
 /* Larger than tablet */
 @media (min-width: 750px) {
-  #svg {
-    height: 7500px;
-    width: 7500px;
-  }
+
 }
 
 /* Larger than desktop */
 @media (min-width: 1000px) {
-  #svg {
-    height: 1000px;
-    width: 1000px;
-  }
+
 }
 
 /* Larger than Desktop HD */
 @media (min-width: 1200px) {
-  #svg {
-    height: 1200px;
-    width: 1200px;
-  }
+
 }

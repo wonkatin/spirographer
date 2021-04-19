@@ -1,9 +1,11 @@
-// svg element
-const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
-//
-console.log('svg height', svg.node().height)
 let width = window.innerWidth;
 let height = window.innerHeight;
+// svg element
+
+
+const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
+//
+
 
 console.log('width', width, 'height', height)
 // add margins
@@ -11,8 +13,8 @@ console.log('width', width, 'height', height)
 // update duration to be relative ratio of time vs points in spiro array
 // add logic to variables for creating random spiro that does not exceed the window
 //create continuous feed before user starts or if they just wanna watch spiros
-maxSize = Math.min((width/2.5), (height/2.5))
-console.log('max-size', maxSize)
+// maxSize = Math.min((width/2.5), (height/2.5))
+// console.log('max-size', maxSize)
 
 // add ability to download or save
 
@@ -64,7 +66,7 @@ d3.select('#startrandom').on('click', function(){
 d3.select('#stoprandom').on('click', function(){
     stopSlideshow = true;
 })
-// function for random color
+// function for random color //http://bl.ocks.org/jdarling/06019d16cb5fd6795edf
 var randomColor = (function(){
     var golden_ratio_conjugate = 0.618033988749895;
     var h = Math.random();
@@ -104,19 +106,9 @@ var randomColor = (function(){
 // function for random spirograph 
 function slideshow() {
     svg.selectAll('*').remove()
-    if (height >= 400 && width >= 400 ) {
-        R = getRandomNumber(10, 400)
-        r = getRandomNumber(30, 300)
-        d = getRandomNumber(1, 300)
-    } else if (height >= 300 && width >= 300 ) {
-        R = getRandomNumber(10, 300)
-        r = getRandomNumber(30, 200)
-        d = getRandomNumber(1, 200)
-    } else {
-        R = getRandomNumber(10, 200)
-        r = getRandomNumber(30, 100)
-        d = getRandomNumber(1, 100)
-    }
+    R = getRandomNumber(10, 400)
+    r = getRandomNumber(30, 300)
+    d = getRandomNumber(1, 300)
     color = '#0A5AFF'
     stroke = getRandomSmallNumber(1,6)
     // dynamically update range inputs (appears on screen like magic)
@@ -225,7 +217,7 @@ function updateStroke(stroke) {
     console.log('stroke', stroke)
 }
 // sets default line stroke value
-updateStroke(2)
+// updateStroke(2)
 
 // event listener for draw spiro button 
 d3.select('#newspiro').on('click', function(){
