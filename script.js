@@ -102,9 +102,9 @@ function slideshow() {
         r = getRandomNumber(30, 150)
         d = getRandomNumber(40, 150)
     } else {
-        R = getRandomNumber(10, 400)
-        r = getRandomNumber(30, 300)
-        d = getRandomNumber(40, 305)
+        R = getRandomNumber(10, 300)
+        r = getRandomNumber(30, 250)
+        d = getRandomNumber(40, 250)
     }
 
     color = '#0A5AFF'
@@ -160,9 +160,9 @@ if (width <= 1500) {
     d3.select('#pen').property('max', '150').property('min', '40')
     d3.selectAll('button').style('padding', '0px 10px')
 } else {
-    d3.select('#fixed').property('max', '400').property('min', '10')
-    d3.select('#rotating').property('max', '300').property('min', '30')
-    d3.select('#pen').property('max', '305').property('min', '40')
+    d3.select('#fixed').property('max', '300').property('min', '10')
+    d3.select('#rotating').property('max', '250').property('min', '30')
+    d3.select('#pen').property('max', '250').property('min', '40')
 }
 // set fixed gear event listener
 d3.select('#fixed').on('input', function(){
@@ -278,7 +278,7 @@ function getSpiroArray() {
         w = width/3
     } else {
         h = height/2
-        w = width/3.5
+        w = width/3
     }
 
 
