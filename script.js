@@ -390,8 +390,8 @@ d3.select('#savespiro').on('click', function() {
     
     dl.attr('href', dataURL);
     // console.log('dataURL', dataURL)
-    // dl.attr('download', 'spiro.svg');
-    // dl.node().click();
+    dl.attr('download', 'spiro.svg');
+    dl.node().click();
 
     //SAVE AS PNG 
     let canvas = d3.select('#canvas').append('canvas')
