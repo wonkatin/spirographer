@@ -158,6 +158,7 @@ if (width <= 1500) {
     d3.select('#fixed').property('max', '150').property('min', '60')
     d3.select('#rotating').property('max', '150').property('min', '30')
     d3.select('#pen').property('max', '150').property('min', '40')
+    d3.selectAll('button').style('padding', '0px 10px')
 } else {
     d3.select('#fixed').property('max', '400').property('min', '10')
     d3.select('#rotating').property('max', '300').property('min', '30')
