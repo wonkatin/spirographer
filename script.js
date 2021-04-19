@@ -274,8 +274,8 @@ function getSpiroArray() {
     let h 
     let w 
     if (width <= 500) {
-        h = height/2
-        w = width/2
+        h = height
+        w = width
     } 
     if (width <= 1500) {
         h = height/2.5
