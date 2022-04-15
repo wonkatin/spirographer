@@ -7,10 +7,10 @@ let height = window.innerHeight;
 const svg = d3.select('#svg').append('svg').attr('height','100%').attr('width','100%')
 
 //////////////////////////////WELCOME TO SPIROGRAPH CITY home of the SPIROGRAPHER///////////////////////
-// start slideshow
-setTimeout(function () {
-    slideshow()
-}, 1000)
+// start slideshow-- deactivate so slideshow doesn't start
+// setTimeout(function () {
+//     slideshow()
+// }, 1000)
 // function to get random numbers between two numbers 
 function getRandomNumber(min, max) { // get random number between range
     return Math.round((Math.random()*(max-min)+min)/10)*10 ; // don't go under the min or over the max // return a multiple of 10
@@ -36,14 +36,16 @@ function lcm(num1, num2) {
 }
 
 // global variables
-let R = 0
-let r = 0
-let d = 0
+let R = 110
+let r = 30
+let d = 120
 let color = ''
 let stroke = 0
 let stopSlideshow = false;
 
-
+updateFixed(R)
+updateRotating(r)
+updatePen(d)
 
 // event listener for start slideshow button
 d3.select('#startrandom').on('click', function(){
@@ -243,7 +245,7 @@ d3.select('#newspiro').on('click', function(){
     d = d3.select('#pen').property('value');
     color = d3.select('#color').property('value');
     stroke = d3.select('#stroke').property('value')
-    // console.log('R:', R, 'r:', r, 'd:', d, 'color:', color)
+    console.log('R:', R, 'r:', r, 'd:', d, 'color:', color, 'stroke', stroke)
     drawSpiro()
 })
 
